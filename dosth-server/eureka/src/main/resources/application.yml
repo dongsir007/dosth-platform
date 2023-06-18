@@ -1,0 +1,18 @@
+server:
+  port: 8081 #服务注册中心端口号
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  instance:
+    hostname: localhost # 服务注册中心Ip地址
+  client:
+    register-with-eureka: false # 是否向服务注册中心注册自己
+    fetch-registry: true # 是否检索服务
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}
+  server:
+    renewal-percent-threshold: 0.5 # 留存的服务示例低于多少比例进入保护魔术
+    enable-self-preservation: true # 是否开启保护模式
