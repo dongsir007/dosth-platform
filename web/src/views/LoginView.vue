@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import $router from 'vue-router'
 export default {
   __name: 'Login',
   data () {
