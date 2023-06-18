@@ -1,0 +1,54 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: dosth-gateway
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: 123
+    timeout: 100
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8 
+        min-idle: 0
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: eureka
+          uri: lb://DOSTH-EUREKA
+          predicates:
+            - Path=/eureka/**
+          filters:
+            - StripPrefix=1
+        - id: auth
+          uri: lb://DOSTH-AUTH
+          predicates:
+            - Path=/auth/**
+          filters:
+          - StripPrefix=1
+        - id: 163                        #网关路由到网易官网
+          uri: http://www.163.com/
+          predicates:
+          - Path=/163/**
+          filters:
+          - StripPrefix=1  #忽略Path配置的个数，此处为1代表访问/api/customer/**时，会将api忽略，真实的访问地址为lb://customer-center/customer/**,如果为2，则为lb://customer-center/**
+          #- Authorize=true #启用过滤器 Authorize为过滤类的前缀
+
+feign:
+  hystrix:
+   enabled: false
+   
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://locahost:8081/eureka/
