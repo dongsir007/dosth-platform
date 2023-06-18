@@ -28,18 +28,13 @@ const router = createRouter({
   routes
 })
 
-const whiteList = ['/']
+const whiteList = ['/', '/about']
 router.beforeEach((to, from, next) => {
-  // 登录或关于直接跳转
-  if (to.path === '/' || to.path === '/about') {
+  if (whiteList.includes(to.path)) {
     next()
   } else {
-    if (whiteList.includes(to.path)) {
-      next()
-    } else {
-      const token = window.localStorage.token
-      token ? next() : next({ path: '/' })
-    }
+    const token = window.localStorage.getItem('token')
+    token ? next() : next({ path: '/' })
   }
 })
 

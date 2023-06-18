@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import $router from 'vue-router'
 export default {
   __name: 'Login',
   data () {
@@ -46,6 +47,8 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           alert('提交成功')
+          localStorage.setItem('token', 123)
+          this.$router.push('/index')
         } else {
           this.$message.error('登录出错请重新登录')
           return false
