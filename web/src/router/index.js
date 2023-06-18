@@ -28,4 +28,19 @@ const router = createRouter({
   routes
 })
 
+const whiteList = ['/']
+router.beforeEach((to, from, next) => {
+  // 登录或关于直接跳转
+  if (to.path === '/' || to.path === '/about') {
+    next()
+  } else {
+    if (whiteList.includes(to.path)) {
+      next()
+    } else {
+      const token = window.localStorage.token
+      token ? next() : next({ path: '/' })
+    }
+  }
+})
+
 export default router
