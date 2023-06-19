@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: jwt
+
+dosth:
+  jwt:
+    enabled: true
+    secret: dosth
+    expiration: 3600000
+    header: Authorization
+    user-param-name: userId
+    pwd-param-name: password
+    user-default-controller: true
+    skip-valid-url: /auth/login

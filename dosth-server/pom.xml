@@ -22,6 +22,7 @@
 		<spring-cloud.version>2021.0.7</spring-cloud.version>
 		<fastjson.version>2.0.6</fastjson.version>
 		<hystrix.version>2.2.10.RELEASE</hystrix.version>
+		<jwt.version>0.9.1</jwt.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -65,5 +66,6 @@
 		<module>common</module>
 		<module>eureka</module>
 		<module>gateway</module>
+		<module>jwt</module>
 	</modules>
 </project>
